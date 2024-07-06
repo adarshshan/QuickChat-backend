@@ -16,7 +16,7 @@ const app = express();
 dotenv.config()
 
 const corsOptions = {
-    origin: process.env.CORS_URL,
+    origin: 'https://quick-chat-frontend-ivory.vercel.app',
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
