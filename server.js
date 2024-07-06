@@ -5,6 +5,7 @@ const connectDB = require('./config/db');
 const userRoutes = require('../backend/Routes/userRoutes');
 const chatRoutes = require('../backend/Routes/chatRoutes');
 const messageRoutes = require('../backend/Routes/messageRoutes');
+const cors = require('cors')
 const path = require('path')
 
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
@@ -14,7 +15,16 @@ connectDB();
 const app = express();
 dotenv.config()
 
+const corsOptions = {
+    origin: process.env.CORS_URL,
+    credentials: true,
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+    allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
+    optionsSuccessStatus: 200
+};
+
 app.use(express.json());
+app.use(cors(corsOptions));
 
 app.use("/api/user", userRoutes)
 app.use("/api/chats", chatRoutes)
