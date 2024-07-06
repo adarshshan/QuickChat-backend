@@ -2,9 +2,9 @@ const express = require('express');
 const dotenv = require('dotenv');
 const { chats } = require('./data/data');
 const connectDB = require('./config/db');
-const userRoutes = require('../backend/Routes/userRoutes');
-const chatRoutes = require('../backend/Routes/chatRoutes');
-const messageRoutes = require('../backend/Routes/messageRoutes');
+const userRoutes = require('./Routes/userRoutes');
+const chatRoutes = require('./Routes/chatRoutes');
+const messageRoutes = require('./Routes/messageRoutes');
 const cors = require('cors')
 const path = require('path')
 
