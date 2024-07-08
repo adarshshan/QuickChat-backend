@@ -16,7 +16,7 @@ const app = express();
 dotenv.config()
 
 const corsOptions = {
-    origin: 'https://quick-chat-frontend-ivory.vercel.app',
+    origin: process.env.CORS_URL,
     credentials: true,
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     allowedHeaders: 'Origin,X-Requested-With,Content-Type,Accept,Authorization',
@@ -36,12 +36,12 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 8000;
 
 
-const server = app.listen(8000, console.log(`server started on PORT ${PORT}`));
+const server = app.listen(PORT, console.log(`server started on PORT ${PORT}`));
 
 const io = require("socket.io")(server, {
     pingTimeout: 60000,
     cors: {
-        origin: "http://localhost:3000",
+        origin: process.env.CORS_URL,
         // credentials: true,
     },
 });
