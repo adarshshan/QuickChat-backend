@@ -4,9 +4,12 @@ const connectDB = require('./config/db');
 const userRoutes = require('./Routes/userRoutes');
 const chatRoutes = require('./Routes/chatRoutes');
 const messageRoutes = require('./Routes/messageRoutes');
+const cron = require('node-cron');
 const cors = require('cors')
 
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+
+const SERVER = 'https://quickchat-backend-lcr5.onrender.com';
 
 
 connectDB();
@@ -24,6 +27,8 @@ const corsOptions = {
 app.use(express.json());
 app.use(cors(corsOptions));
 
+app.get('/', (req, res) => res.send('hello world...'));
+
 app.use("/api/user", userRoutes)
 app.use("/api/chats", chatRoutes)
 app.use("/api/messages", messageRoutes)
@@ -32,6 +37,18 @@ app.use(notFound)
 app.use(errorHandler)
 
 const PORT = process.env.PORT || 8000;
+
+// Cron job to send request every 2 minutes
+cron.schedule("*/2 * * * *", () => {
+    axios
+        .get(SERVER)
+        .then((response) => {
+            console.log(`Request sent successfully at ${new Date()}`);
+        })
+        .catch((error) => {
+            console.error(`Error sending request: ${error.message}`);
+        });
+});
 
 
 const server = app.listen(PORT, console.log(`server started on PORT ${PORT}`));
