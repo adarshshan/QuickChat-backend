@@ -8,6 +8,7 @@ const cron = require('node-cron');
 const cors = require('cors')
 
 const { notFound, errorHandler } = require('./middleware/errorMiddleware');
+const { default: axios } = require('axios');
 
 const SERVER = 'https://quickchat-backend-lcr5.onrender.com';
 
