@@ -40,7 +40,7 @@ app.use(errorHandler)
 const PORT = process.env.PORT || 8000;
 
 // Cron job to send request every 2 minutes
-cron.schedule("*/2 * * * *", () => {
+cron.schedule("*/1 * * * *", () => {
     axios
         .get(SERVER)
         .then((response) => {
